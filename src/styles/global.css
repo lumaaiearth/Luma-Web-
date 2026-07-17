@@ -8,9 +8,7 @@
   --f-serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
   --f-mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,monospace;
   --maxw:1180px;
-  --img-hero:url("/images/hero.jpg"); --img-greenroof:url("/images/greenroof.jpg"); --img-facade:url("/images/facade.jpg");
-  --img-macro:url("/images/macro.jpg"); --img-arborist:url("/images/arborist.jpg"); --img-aerial:url("/images/aerial.jpg");
-  --img-planting:url("/images/planting.jpg");
+  /* --img-* Variablen werden base-aware in Base.astro gesetzt (GitHub-Pages-Unterpfad) */
 }
 @media (prefers-color-scheme:dark){
   :root{--bg:#0C1310;--surface:#131E18;--surface-2:#0F1813;--ink:#E9EFE7;--ink-2:#BDC9BC;
