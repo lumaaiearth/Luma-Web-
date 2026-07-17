@@ -1,0 +1,222 @@
+---
+import { useT, defaultLang } from '../i18n/ui';
+const lang = Astro.currentLocale ?? defaultLang;
+const t = useT(lang);
+const bg = (k: string) => `background-image:var(--img-${k})`;
+const g = t.services.groups as Record<string, string>;
+---
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="bg" role="img" aria-label={t.hero.title}></div>
+  <div class="veil"></div>
+  <div class="in">
+    <span class="eyebrow">{t.hero.eyebrow}</span>
+    <h1>{t.hero.title}</h1>
+    <p class="sub">{t.hero.sub}</p>
+    <div class="cta">
+      <a href="#kontakt" class="btn btn-primary">{t.hero.ctaPrimary} →</a>
+      <a href="#projekte" class="btn btn-light">{t.hero.ctaSecondary}</a>
+    </div>
+    <div class="stats">
+      {t.hero.stats.map((s: any) => (
+        <div class="stat"><b>{s.b}</b><span>{s.s}</span></div>
+      ))}
+    </div>
+  </div>
+  <div class="vidnote">{t.hero.video}</div>
+  <div class="scrollhint">{t.hero.scroll}</div>
+</header>
+
+<!-- LOGO WALL -->
+<div class="logos">
+  <div class="in">
+    <div class="lab">{t.logos.label}</div>
+    <div class="row">
+      <span class="lg">BEW <small>Energie &amp; Wärme</small></span>
+      <span class="lg">JOPE <small>AG</small></span>
+      <span class="lg">Stadt&nbsp;Berlin</span>
+      <span class="lg">WISAG</span>
+      <span class="lg">Stromnetz&nbsp;Berlin</span>
+      <span class="lg">HTW <small>Berlin</small></span>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="blk"><div class="wrap">
+  <div class="prob-grid">
+    <div>
+      <span class="eyebrow">{t.problem.eyebrow}</span>
+      <p class="prob-quote">{t.problem.quote}</p>
+      <p class="lede" style="margin-top:18px;max-width:52ch">{t.problem.body}</p>
+    </div>
+    <div class="prob-cards">
+      {t.problem.cards.map((c: any) => (
+        <div class="pc"><b>{c.b}</b><p>{c.p}</p></div>
+      ))}
+    </div>
+  </div>
+</div></section>
+
+<!-- APPROACH -->
+<section class="blk" id="ueber"><div class="wrap">
+  <div class="shead">
+    <span class="eyebrow">{t.approach.eyebrow}</span>
+    <h2>{t.approach.title}</h2>
+    <p>{t.approach.sub}</p>
+  </div>
+  <div class="trio">
+    {t.approach.trio.map((x: any) => (
+      <div class="t"><div class="n">{x.n}</div><h3>{x.h}</h3><p>{x.p}</p></div>
+    ))}
+  </div>
+  <div class="manifesto">
+    <div class="glow"></div>
+    <p class="q">{t.approach.manifesto}</p>
+    <div class="src">{t.approach.manifestoSrc}</div>
+  </div>
+</div></section>
+
+<!-- SERVICES -->
+<section class="blk" id="leistungen"><div class="wrap">
+  <div class="shead">
+    <span class="eyebrow">{t.services.eyebrow}</span>
+    <h2>{t.services.title}</h2>
+    <p>{t.services.sub}</p>
+  </div>
+  <div class="svcs">
+    {t.services.items.map((s: any) => (
+      <div class="svc"><div class="n">{g[s.g]}</div><h3>{s.h}</h3><p>{s.p}</p></div>
+    ))}
+  </div>
+</div></section>
+
+<!-- SOLUTIONS -->
+<section class="blk"><div class="wrap">
+  <div class="shead">
+    <span class="eyebrow">{t.solutions.eyebrow}</span>
+    <h2>{t.solutions.title}</h2>
+  </div>
+  <div class="sol">
+    {t.solutions.items.map((s: any) => (
+      <a class="scard">
+        <div class="img" style={bg(s.img)}></div>
+        <div class="v"></div>
+        <div class="sard"><div class="tg">{s.tg}</div><h3>{s.h}</h3><p>{s.p}</p></div>
+      </a>
+    ))}
+  </div>
+</div></section>
+
+<!-- REFERENCES -->
+<section class="blk" id="projekte"><div class="wrap">
+  <div class="shead">
+    <span class="eyebrow">{t.references.eyebrow}</span>
+    <h2>{t.references.title}</h2>
+    <p>{t.references.sub}</p>
+  </div>
+  <div class="refs">
+    {t.references.items.map((r: any) => (
+      <div class="ref">
+        <div class="img" style={bg(r.img)}></div>
+        <div class="b">
+          <div class="cl">{r.cl}</div>
+          <h3>{r.h}</h3>
+          <p>{r.p}</p>
+          <div class="kpi">
+            {r.kpi.map((k: any) => (<div><b>{k.b}</b><span>{k.s}</span></div>))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div></section>
+
+<!-- BIOME -->
+<section class="biome"><div class="biome-in">
+  <div>
+    <span class="eyebrow">{t.biome.eyebrow}</span>
+    <h2>{t.biome.title}</h2>
+    <p>{t.biome.body1}</p>
+    <p style="margin-top:12px">{t.biome.body2}</p>
+    <div class="cta">
+      <a href="https://luma-biome.de" target="_blank" rel="noopener" class="btn btn-primary">{t.biome.cta} →</a>
+    </div>
+  </div>
+  <div class="dash" role="img" aria-label={t.biome.dashTitle}>
+    <div class="dh"><b>{t.biome.dashTitle}</b><span>● live</span></div>
+    <div class="dtiles">
+      {t.biome.tiles.map((d: any) => (<div class="dtile"><b>{d.b}</b><span>{d.s}</span></div>))}
+    </div>
+    {t.biome.rows.map((r: any) => (
+      <div class="drow">
+        <span class="nm">{r.nm}</span>
+        <span class="bar"><i style={`width:${r.pct}%`}></i></span>
+        <span class="pct">{r.pct}%</span>
+      </div>
+    ))}
+  </div>
+</div></section>
+
+<!-- TESTIMONIALS -->
+<section class="blk"><div class="wrap">
+  <div class="shead">
+    <span class="eyebrow">{t.testimonials.eyebrow}</span>
+    <h2>{t.testimonials.title}</h2>
+  </div>
+  <div class="tst">
+    {t.testimonials.items.map((x: any) => (
+      <div class="tcard">
+        <p class="q">{x.q}</p>
+        <div class="a"><span class="av">{x.av}</span><div><b>{x.n}</b><small>{x.r}</small></div></div>
+      </div>
+    ))}
+  </div>
+</div></section>
+
+<!-- JOURNAL -->
+<section class="blk" id="journal"><div class="wrap">
+  <div class="shead">
+    <span class="eyebrow">{t.journal.eyebrow}</span>
+    <h2>{t.journal.title}</h2>
+    <p>{t.journal.sub} <span class="mono" style="color:var(--earth)">{t.journal.note}</span></p>
+  </div>
+  <div class="jrn">
+    {t.journal.items.map((j: any) => (
+      <a class="jc">
+        <div class="img" style={bg(j.img)}></div>
+        <div class="b"><div class="m">{j.m}</div><h3>{j.h}</h3><p>{j.p}</p></div>
+      </a>
+    ))}
+  </div>
+</div></section>
+
+<!-- CTA -->
+<section class="ctaband">
+  <h2>{t.ctaband.title}</h2>
+  <a href="#kontakt" class="btn btn-primary">{t.ctaband.cta} →</a>
+</section>
+
+<!-- CONTACT -->
+<section class="blk" id="kontakt"><div class="wrap">
+  <div class="cont">
+    <div>
+      <span class="eyebrow">{t.contact.eyebrow}</span>
+      <h2 style="font-size:32px;margin:14px 0 14px">{t.contact.title}</h2>
+      <p class="lede" style="max-width:44ch">{t.contact.sub}</p>
+      <div class="cinfo" style="margin-top:26px">
+        <b>LUMA</b>
+        <p>{t.contact.address}<br /><a href="mailto:info@luma.earth">info@luma.earth</a></p>
+      </div>
+    </div>
+    <form class="form" onsubmit="return false">
+      <label for="n">{t.contact.name}</label>
+      <input id="n" placeholder={t.contact.namePh} />
+      <label for="e">{t.contact.email}</label>
+      <input id="e" type="email" placeholder={t.contact.emailPh} />
+      <label for="m">{t.contact.msg}</label>
+      <textarea id="m" placeholder={t.contact.msgPh}></textarea>
+      <button class="btn btn-primary" style="justify-content:center">{t.contact.send}</button>
+    </form>
+  </div>
+</div></section>
