@@ -1,0 +1,24 @@
+---
+// Gemeinsames Layout für Rechtsseiten. Inhalt kommt als Slot.
+const { eyebrow, title, note } = Astro.props;
+---
+<section class="pagehero"><div class="wrap">
+  <span class="eyebrow">{eyebrow}</span>
+  <h1>{title}</h1>
+  {note && <p>{note}</p>}
+</div></section>
+
+<section class="prose"><div class="wrap legal">
+  <slot />
+</div></section>
+
+<style>
+  .legal :global(h2){font-size:21px;margin:34px 0 10px;font-weight:750}
+  .legal :global(h2:first-child){margin-top:0}
+  .legal :global(h3){font-size:16.5px;margin:22px 0 8px;font-weight:700}
+  .legal :global(p){font-size:15.5px;color:var(--ink-2);max-width:76ch;margin:0 0 12px;line-height:1.65}
+  .legal :global(ul){margin:0 0 14px;padding-left:0;list-style:none}
+  .legal :global(li){position:relative;padding-left:20px;margin:0 0 7px;color:var(--ink-2);font-size:15.5px}
+  .legal :global(li)::before{content:"";position:absolute;left:2px;top:10px;width:6px;height:6px;border-radius:2px;background:var(--green);transform:rotate(45deg)}
+  .legal :global(mark){background:color-mix(in srgb,var(--earth) 22%,transparent);color:var(--ink);border-radius:4px;padding:1px 6px;font-family:var(--f-mono);font-size:13.5px}
+</style>

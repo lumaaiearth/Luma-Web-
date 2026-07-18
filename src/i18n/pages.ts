@@ -5,6 +5,9 @@ export const routes = {
   journal: { de: 'journal', en: 'journal' },
   about: { de: 'ueber-uns', en: 'about' },
   contact: { de: 'kontakt', en: 'contact' },
+  imprint: { de: 'impressum', en: 'imprint' },
+  privacy: { de: 'datenschutz', en: 'privacy' },
+  terms: { de: 'agb', en: 'terms' },
 } as const;
 
 export type RouteKey = keyof typeof routes;

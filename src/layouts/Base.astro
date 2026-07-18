@@ -15,6 +15,9 @@ const link = {
   journal: pageHref(base, lang, 'journal'),
   about: pageHref(base, lang, 'about'),
   contact: pageHref(base, lang, 'contact'),
+  imprint: pageHref(base, lang, 'imprint'),
+  privacy: pageHref(base, lang, 'privacy'),
+  terms: pageHref(base, lang, 'terms'),
 };
 const imgKeys = ['hero', 'greenroof', 'facade', 'macro', 'arborist', 'aerial', 'planting'];
 const imgCss = ':root{' + imgKeys.map((k) => `--img-${k}:url("${base}images/${k}.jpg")`).join(';') + '}';
@@ -79,9 +82,9 @@ const favicon =
         </div>
         <div>
           <h4>{t.footer.colLegal}</h4>
-          <a href="#">{t.footer.imprint}</a>
-          <a href="#">{t.footer.privacy}</a>
-          <a href="#">{t.footer.terms}</a>
+          <a href={link.imprint}>{t.footer.imprint}</a>
+          <a href={link.privacy}>{t.footer.privacy}</a>
+          <a href={link.terms}>{t.footer.terms}</a>
           <a href="#" id="cookieopen">{t.footer.cookies}</a>
         </div>
       </div>

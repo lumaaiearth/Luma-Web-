@@ -130,7 +130,7 @@ export const ui = {
       email: 'E-Mail', emailPh: 'name@firma.de',
       msg: 'Ihr Anliegen', msgPh: 'Kurz zur Fläche und zum Ziel …',
       send: 'Anfrage senden',
-      address: 'Schillerstraße 15 · Eberswalde',
+      address: 'Eberswalde',
     },
     footer: {
       tagline: 'Die lebendige Infrastrukturebene der Städte von morgen. Data Science, Handwerk und Ökologie aus einer Hand.',
@@ -272,7 +272,7 @@ export const ui = {
       email: 'Email', emailPh: 'name@company.com',
       msg: 'Your request', msgPh: 'Briefly about the site and the goal …',
       send: 'Send request',
-      address: 'Schillerstraße 15 · Eberswalde, Germany',
+      address: 'Eberswalde, Germany',
     },
     footer: {
       tagline: 'The living infrastructure layer of the cities of tomorrow. Data science, craftsmanship and ecology from a single source.',

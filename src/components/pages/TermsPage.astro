@@ -1,0 +1,34 @@
+---
+import LegalPage from './LegalPage.astro';
+import { defaultLang } from '../../i18n/ui';
+const lang = Astro.currentLocale ?? defaultLang;
+const de = lang === 'de';
+---
+{de ? (
+<LegalPage eyebrow="Rechtliches" title="Allgemeine Geschäftsbedingungen" note="Entwurf — vor Verwendung juristisch prüfen lassen. Gilt für Verträge mit Unternehmen, Kommunen und Institutionen (B2B).">
+  <h2>1. Geltungsbereich</h2>
+  <p>Diese AGB gelten für alle Verträge zwischen LUMA <mark>[Rechtsform]</mark> („LUMA") und Auftraggebern über Beratungs-, Planungs-, Bau-, Pflanz- und Pflegeleistungen sowie Monitoring-Leistungen. Abweichende Bedingungen des Auftraggebers gelten nur bei schriftlicher Bestätigung.</p>
+  <h2>2. Angebote &amp; Vertragsschluss</h2>
+  <p>Angebote sind freibleibend, sofern nicht ausdrücklich als bindend bezeichnet. Ein Vertrag kommt durch schriftliche Auftragsbestätigung oder Beginn der Leistungserbringung zustande.</p>
+  <h2>3. Leistungsumfang</h2>
+  <p>Art und Umfang der Leistungen ergeben sich aus dem Angebot bzw. der Leistungsbeschreibung. Lebende Pflanzen unterliegen natürlichen Schwankungen; Abweichungen in Wuchs und Erscheinungsbild stellen keinen Mangel dar, soweit die vereinbarte Funktion erreicht wird.</p>
+  <h2>4. Mitwirkungspflichten des Auftraggebers</h2>
+  <p>Der Auftraggeber stellt erforderliche Zugänge, Medien (Wasser/Strom) und Genehmigungen rechtzeitig bereit und informiert über Leitungen und Lasten im Boden. Verzögerungen aus unterlassener Mitwirkung gehen nicht zu Lasten von LUMA.</p>
+  <h2>5. Vergütung &amp; Zahlung</h2>
+  <p>Es gelten die vereinbarten Preise zzgl. gesetzlicher Umsatzsteuer. Rechnungen sind <mark>[z. B. 14 Tage]</mark> nach Zugang ohne Abzug fällig. LUMA ist berechtigt, angemessene Abschlagszahlungen zu verlangen.</p>
+  <h2>6. Anwuchs &amp; Pflege</h2>
+  <p>Eine Anwuchsgarantie besteht nur, wenn sie ausdrücklich vereinbart ist — in der Regel in Verbindung mit einem Pflegevertrag durch LUMA. Bei Pflege durch Dritte oder unterlassener Bewässerung entfällt die Gewähr für den Anwuchserfolg.</p>
+  <h2>7. Gewährleistung &amp; Haftung</h2>
+  <p>Es gelten die gesetzlichen Gewährleistungsrechte. LUMA haftet unbeschränkt für Vorsatz, grobe Fahrlässigkeit und Verletzung von Leben, Körper und Gesundheit; im Übrigen nur für die Verletzung wesentlicher Vertragspflichten, begrenzt auf den vorhersehbaren, vertragstypischen Schaden.</p>
+  <h2>8. Daten &amp; Monitoring</h2>
+  <p>Soweit Monitoring-Leistungen (Sensorik, BIOME-Plattform) vereinbart sind, räumt der Auftraggeber LUMA das Recht ein, projektbezogene Messdaten zu erheben und in anonymisierter bzw. aggregierter Form für wissenschaftliche Auswertungen und die Weiterentwicklung der Plattform zu nutzen. Personenbezogene Daten sind hiervon nicht umfasst.</p>
+  <h2>9. Schlussbestimmungen</h2>
+  <p>Es gilt deutsches Recht. Gerichtsstand ist, soweit zulässig, der Sitz von LUMA. Sollten einzelne Bestimmungen unwirksam sein, bleibt der Vertrag im Übrigen wirksam.</p>
+</LegalPage>
+) : (
+<LegalPage eyebrow="Legal" title="Terms & Conditions" note="Draft — have reviewed by counsel before use. B2B only; the German version is authoritative.">
+  <h2>Summary</h2>
+  <p>These terms govern contracts between LUMA and business, municipal and institutional clients for consulting, planning, installation, planting, maintenance and monitoring services. German law applies; the German version of these terms is the binding one.</p>
+  <p>Key points: offers are non-binding unless stated otherwise; living plants naturally vary and such variation is not a defect if the agreed function is achieved; establishment guarantees require an explicit agreement, typically combined with a LUMA maintenance contract; statutory warranty rights apply; project sensor data may be used in anonymized, aggregated form for scientific evaluation and platform development.</p>
+</LegalPage>
+)}

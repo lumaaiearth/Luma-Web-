@@ -1,0 +1,47 @@
+---
+import LegalPage from './LegalPage.astro';
+import { defaultLang } from '../../i18n/ui';
+const lang = Astro.currentLocale ?? defaultLang;
+const de = lang === 'de';
+---
+{de ? (
+<LegalPage eyebrow="Rechtliches" title="Datenschutzerklärung" note="Stand: Juli 2026 — bitte vor Veröffentlichung juristisch prüfen lassen.">
+  <h2>1. Verantwortlicher</h2>
+  <p>LUMA <mark>[Rechtsform]</mark>, <mark>[Anschrift]</mark>, Eberswalde · E-Mail: info@luma.earth</p>
+
+  <h2>2. Hosting (GitHub Pages)</h2>
+  <p>Diese Website wird bei GitHub Pages gehostet (GitHub, Inc., 88 Colin P. Kelly Jr. St, San Francisco, CA 94107, USA). Beim Aufruf der Seiten verarbeitet GitHub technisch notwendige Daten (u. a. IP-Adresse, Datum/Uhrzeit, aufgerufene Seite, Browser-Kennung) in Server-Logs. Rechtsgrundlage ist unser berechtigtes Interesse an der sicheren und effizienten Bereitstellung der Website (Art. 6 Abs. 1 lit. f DSGVO). GitHub kann Daten in die USA übertragen; GitHub ist nach dem EU-U.S. Data Privacy Framework zertifiziert.</p>
+
+  <h2>3. Kontaktformular</h2>
+  <p>Wenn Sie unser Kontaktformular nutzen, verarbeiten wir die von Ihnen angegebenen Daten (Name, E-Mail-Adresse, Nachricht, Spracheinstellung sowie technisch Ihre Browser-Kennung) zur Bearbeitung Ihrer Anfrage. Die Daten werden in unserer Datenbank bei Supabase (Region EU/Frankfurt) gespeichert. Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sowie ggf. die Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO). Wir löschen Anfragen, sobald sie abschließend bearbeitet sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
+
+  <h2>4. Cookies &amp; lokale Speicherung</h2>
+  <p>Diese Website verwendet keine Tracking- oder Marketing-Cookies. Im lokalen Speicher Ihres Browsers (localStorage) merken wir uns lediglich Ihre Theme-Einstellung (hell/dunkel) und Ihre Cookie-Entscheidung. Diese Daten verlassen Ihren Browser nicht.</p>
+
+  <h2>5. Externe Links</h2>
+  <p>Unsere Website verlinkt auf unsere Betriebsplattform (luma-biome.de) und ggf. auf externe Angebote. Für deren Datenverarbeitung sind die jeweiligen Anbieter verantwortlich.</p>
+
+  <h2>6. Ihre Rechte</h2>
+  <ul>
+    <li>Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17)</li>
+    <li>Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20)</li>
+    <li>Widerspruch gegen Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. f (Art. 21)</li>
+    <li>Widerruf erteilter Einwilligungen mit Wirkung für die Zukunft (Art. 7 Abs. 3)</li>
+    <li>Beschwerde bei einer Aufsichtsbehörde (Art. 77) — für Brandenburg: LDA Brandenburg</li>
+  </ul>
+  <p>Zur Ausübung Ihrer Rechte genügt eine formlose E-Mail an info@luma.earth.</p>
+</LegalPage>
+) : (
+<LegalPage eyebrow="Legal" title="Privacy Policy" note="As of July 2026. The German version is authoritative.">
+  <h2>1. Controller</h2>
+  <p>LUMA <mark>[legal form]</mark>, Eberswalde, Germany · Email: info@luma.earth</p>
+  <h2>2. Hosting (GitHub Pages)</h2>
+  <p>This website is hosted on GitHub Pages (GitHub, Inc., USA). When you visit, GitHub processes technically necessary data (e.g. IP address, timestamp, requested page, user agent) in server logs. Legal basis: our legitimate interest in providing the site securely (Art. 6(1)(f) GDPR). GitHub is certified under the EU-U.S. Data Privacy Framework.</p>
+  <h2>3. Contact form</h2>
+  <p>If you use the contact form, we process the data you provide (name, email, message, language, user agent) to handle your request. Data is stored in our Supabase database (EU region, Frankfurt). Legal basis: your consent (Art. 6(1)(a)) and pre-contractual measures (Art. 6(1)(b)). Requests are deleted once fully handled, unless statutory retention applies.</p>
+  <h2>4. Cookies &amp; local storage</h2>
+  <p>No tracking or marketing cookies. Your browser's localStorage only keeps your theme preference and cookie choice; this data never leaves your browser.</p>
+  <h2>5. Your rights</h2>
+  <p>You have the rights of access, rectification, erasure, restriction, portability, objection and withdrawal of consent (Art. 15–21, Art. 7(3) GDPR), and the right to lodge a complaint with a supervisory authority. Email info@luma.earth to exercise them.</p>
+</LegalPage>
+)}
