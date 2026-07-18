@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { useT, defaultLang } from '../i18n/ui';
+import { pageHref } from '../i18n/pages';
 
 const lang = Astro.currentLocale ?? defaultLang;
 const t = useT(lang);
@@ -8,6 +9,13 @@ const isDe = lang === 'de';
 const base = import.meta.env.BASE_URL; // '/' oder '/Luma-Web-/'
 const home = base;
 const en = base + 'en/';
+const link = {
+  services: pageHref(base, lang, 'services'),
+  projects: pageHref(base, lang, 'projects'),
+  journal: pageHref(base, lang, 'journal'),
+  about: pageHref(base, lang, 'about'),
+  contact: pageHref(base, lang, 'contact'),
+};
 const imgKeys = ['hero', 'greenroof', 'facade', 'macro', 'arborist', 'aerial', 'planting'];
 const imgCss = ':root{' + imgKeys.map((k) => `--img-${k}:url("${base}images/${k}.jpg")`).join(';') + '}';
 const favicon =
@@ -31,11 +39,11 @@ const favicon =
       <div class="nav-in">
         <a href={isDe ? home : en} class="logo"><span class="d"></span>LUMA</a>
         <div class="nav-links">
-          <a href="#leistungen">{t.nav.services}</a>
-          <a href="#projekte">{t.nav.projects}</a>
-          <a href="#journal">{t.nav.journal}</a>
-          <a href="#ueber">{t.nav.about}</a>
-          <a href="#kontakt">{t.nav.contact}</a>
+          <a href={link.services}>{t.nav.services}</a>
+          <a href={link.projects}>{t.nav.projects}</a>
+          <a href={link.journal}>{t.nav.journal}</a>
+          <a href={link.about}>{t.nav.about}</a>
+          <a href={link.contact}>{t.nav.contact}</a>
         </div>
         <div class="nav-right">
           <span class="lang">
@@ -57,16 +65,16 @@ const favicon =
         </div>
         <div>
           <h4>{t.footer.colServices}</h4>
-          <a href="#leistungen">{t.services.items[0].h}</a>
-          <a href="#leistungen">{t.services.items[2].h}</a>
-          <a href="#leistungen">{t.services.items[5].h}</a>
-          <a href="#leistungen">{t.services.items[6].h}</a>
+          <a href={link.services}>{t.services.items[0].h}</a>
+          <a href={link.services}>{t.services.items[2].h}</a>
+          <a href={link.services}>{t.services.items[5].h}</a>
+          <a href={link.services}>{t.services.items[6].h}</a>
         </div>
         <div>
           <h4>{t.footer.colCompany}</h4>
-          <a href="#projekte">{t.nav.projects}</a>
-          <a href="#ueber">{t.nav.about}</a>
-          <a href="#journal">{t.nav.journal}</a>
+          <a href={link.projects}>{t.nav.projects}</a>
+          <a href={link.about}>{t.nav.about}</a>
+          <a href={link.journal}>{t.nav.journal}</a>
           <a href="https://luma-biome.de" target="_blank" rel="noopener">{t.footer.opsLogin}</a>
         </div>
         <div>
@@ -104,7 +112,8 @@ const favicon =
           var next = (root.getAttribute('data-theme') || sys()) === 'dark' ? 'light' : 'dark';
           set(next); localStorage.setItem('luma-theme', next);
         });
-        function onScroll() { nav.classList.toggle('solid', scrollY > 60); }
+        var hasHero = !!document.querySelector('.hero');
+        function onScroll() { nav.classList.toggle('solid', !hasHero || scrollY > 60); }
         onScroll(); addEventListener('scroll', onScroll, { passive: true });
         var ck = document.getElementById('cookie');
         if (localStorage.getItem('luma-cookie')) ck.style.display = 'none';

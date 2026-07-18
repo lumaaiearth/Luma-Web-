@@ -1,9 +1,20 @@
 ---
 import { useT, defaultLang } from '../i18n/ui';
+import { pageHref } from '../i18n/pages';
 const lang = Astro.currentLocale ?? defaultLang;
 const t = useT(lang);
 const bg = (k: string) => `background-image:var(--img-${k})`;
 const g = t.services.groups as Record<string, string>;
+const base = import.meta.env.BASE_URL;
+const link = {
+  services: pageHref(base, lang, 'services'),
+  projects: pageHref(base, lang, 'projects'),
+  journal: pageHref(base, lang, 'journal'),
+  contact: pageHref(base, lang, 'contact'),
+};
+const moreServices = lang === 'de' ? 'Alle Leistungen' : 'All services';
+const moreProjects = lang === 'de' ? 'Alle Projekte' : 'All projects';
+const moreJournal = lang === 'de' ? 'Zum Journal' : 'To the journal';
 ---
 <!-- HERO -->
 <header class="hero" id="top">
@@ -14,8 +25,8 @@ const g = t.services.groups as Record<string, string>;
     <h1>{t.hero.title}</h1>
     <p class="sub">{t.hero.sub}</p>
     <div class="cta">
-      <a href="#kontakt" class="btn btn-primary">{t.hero.ctaPrimary} →</a>
-      <a href="#projekte" class="btn btn-light">{t.hero.ctaSecondary}</a>
+      <a href={link.contact} class="btn btn-primary">{t.hero.ctaPrimary} →</a>
+      <a href={link.projects} class="btn btn-light">{t.hero.ctaSecondary}</a>
     </div>
     <div class="stats">
       {t.hero.stats.map((s: any) => (
@@ -83,6 +94,7 @@ const g = t.services.groups as Record<string, string>;
     <span class="eyebrow">{t.services.eyebrow}</span>
     <h2>{t.services.title}</h2>
     <p>{t.services.sub}</p>
+    <a class="section-more" href={link.services}>{moreServices} →</a>
   </div>
   <div class="svcs">
     {t.services.items.map((s: any) => (
@@ -114,6 +126,7 @@ const g = t.services.groups as Record<string, string>;
     <span class="eyebrow">{t.references.eyebrow}</span>
     <h2>{t.references.title}</h2>
     <p>{t.references.sub}</p>
+    <a class="section-more" href={link.projects}>{moreProjects} →</a>
   </div>
   <div class="refs">
     {t.references.items.map((r: any) => (
@@ -180,6 +193,7 @@ const g = t.services.groups as Record<string, string>;
     <span class="eyebrow">{t.journal.eyebrow}</span>
     <h2>{t.journal.title}</h2>
     <p>{t.journal.sub} <span class="mono" style="color:var(--earth)">{t.journal.note}</span></p>
+    <a class="section-more" href={link.journal}>{moreJournal} →</a>
   </div>
   <div class="jrn">
     {t.journal.items.map((j: any) => (
@@ -194,7 +208,7 @@ const g = t.services.groups as Record<string, string>;
 <!-- CTA -->
 <section class="ctaband">
   <h2>{t.ctaband.title}</h2>
-  <a href="#kontakt" class="btn btn-primary">{t.ctaband.cta} →</a>
+  <a href={link.contact} class="btn btn-primary">{t.ctaband.cta} →</a>
 </section>
 
 <!-- CONTACT -->

@@ -1,0 +1,47 @@
+---
+import { useP, pageHref } from '../../i18n/pages';
+import { useT, defaultLang } from '../../i18n/ui';
+const lang = Astro.currentLocale ?? defaultLang;
+const p = useP(lang).projects;
+const t = useT(lang);
+const base = import.meta.env.BASE_URL;
+const contact = pageHref(base, lang, 'contact');
+const bg = (k: string) => `background-image:var(--img-${k})`;
+---
+<section class="pagehero"><div class="wrap">
+  <span class="eyebrow">{p.eyebrow}</span>
+  <h1>{p.title}</h1>
+  <p>{p.lead}</p>
+</div></section>
+
+<section class="prose"><div class="wrap">
+  <h2>{p.clientsLabel}</h2>
+  <div class="clientlist">
+    {p.clients.map((c: any) => (<div class="clientrow"><b>{c.n}</b><span>{c.c}</span></div>))}
+  </div>
+</div></section>
+
+<section class="prose"><div class="wrap">
+  <h2>{p.featuredLabel}</h2>
+  <div class="refs">
+    {t.references.items.map((r: any) => (
+      <div class="ref">
+        <div class="img" style={bg(r.img)}></div>
+        <div class="b">
+          <div class="cl">{r.cl}</div>
+          <h3>{r.h}</h3>
+          <p>{r.p}</p>
+          <div class="kpi">{r.kpi.map((k: any) => (<div><b>{k.b}</b><span>{k.s}</span></div>))}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+  <div class="mapbox">🗺&nbsp;&nbsp;{p.mapNote}</div>
+</div></section>
+
+<section class="prose"><div class="wrap">
+  <div class="subcta">
+    <h2>{p.ctaTitle}</h2>
+    <a href={contact} class="btn btn-primary">{p.ctaBtn} →</a>
+  </div>
+</div></section>

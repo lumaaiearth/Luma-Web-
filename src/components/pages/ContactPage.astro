@@ -1,0 +1,30 @@
+---
+import { useP } from '../../i18n/pages';
+import { useT, defaultLang } from '../../i18n/ui';
+const lang = Astro.currentLocale ?? defaultLang;
+const p = useP(lang).contact;
+const t = useT(lang);
+---
+<section class="pagehero"><div class="wrap">
+  <span class="eyebrow">{p.eyebrow}</span>
+  <h1>{p.title}</h1>
+  <p>{p.lead}</p>
+</div></section>
+
+<section class="prose"><div class="wrap">
+  <div class="cont">
+    <div class="cinfo">
+      <b>LUMA</b>
+      <p>{t.contact.address}<br /><a href="mailto:info@luma.earth">info@luma.earth</a></p>
+    </div>
+    <form class="form" onsubmit="return false">
+      <label for="n">{t.contact.name}</label>
+      <input id="n" placeholder={t.contact.namePh} />
+      <label for="e">{t.contact.email}</label>
+      <input id="e" type="email" placeholder={t.contact.emailPh} />
+      <label for="m">{t.contact.msg}</label>
+      <textarea id="m" placeholder={t.contact.msgPh}></textarea>
+      <button class="btn btn-primary" style="justify-content:center">{t.contact.send}</button>
+    </form>
+  </div>
+</div></section>

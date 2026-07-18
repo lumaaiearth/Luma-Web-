@@ -1,0 +1,49 @@
+---
+import { useP, pageHref } from '../../i18n/pages';
+import { useT, defaultLang } from '../../i18n/ui';
+const lang = Astro.currentLocale ?? defaultLang;
+const p = useP(lang).about;
+const t = useT(lang);
+const base = import.meta.env.BASE_URL;
+const contact = pageHref(base, lang, 'contact');
+const initials = (n: string) => n.split(' ').map((w) => w[0]).slice(0, 2).join('');
+const ctaTitle = lang === 'de' ? 'Lernen wir uns kennen.' : 'Let’s get to know each other.';
+---
+<section class="pagehero"><div class="wrap">
+  <span class="eyebrow">{p.eyebrow}</span>
+  <h1>{p.title}</h1>
+  <p>{p.lead}</p>
+</div></section>
+
+<section class="prose"><div class="wrap">
+  <div class="mv">
+    <div class="mvcard"><div class="lab">{p.missionLabel}</div><p>{p.mission}</p></div>
+    <div class="mvcard"><div class="lab">{p.visionLabel}</div><p>{p.vision}</p></div>
+  </div>
+</div></section>
+
+<section class="prose"><div class="wrap">
+  <h2>{p.storyLabel}</h2>
+  {p.story.map((s: string) => (<p>{s}</p>))}
+</div></section>
+
+<section class="prose"><div class="wrap">
+  <h2>{p.teamLabel}</h2>
+  <div class="team">
+    {p.team.map((m: any) => (
+      <div class="person">
+        <div class="pav">{initials(m.n)}</div>
+        <b>{m.n}</b>
+        <span class="prole">{m.r}</span>
+        <p>{m.p}</p>
+      </div>
+    ))}
+  </div>
+</div></section>
+
+<section class="prose"><div class="wrap">
+  <div class="subcta">
+    <h2>{ctaTitle}</h2>
+    <a href={contact} class="btn btn-primary">{t.nav.contact} →</a>
+  </div>
+</div></section>

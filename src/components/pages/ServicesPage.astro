@@ -1,0 +1,32 @@
+---
+import { useP, pageHref } from '../../i18n/pages';
+import { defaultLang } from '../../i18n/ui';
+const lang = Astro.currentLocale ?? defaultLang;
+const p = useP(lang).services;
+const base = import.meta.env.BASE_URL;
+const contact = pageHref(base, lang, 'contact');
+---
+<section class="pagehero"><div class="wrap">
+  <span class="eyebrow">{p.eyebrow}</span>
+  <h1>{p.title}</h1>
+  <p>{p.lead}</p>
+</div></section>
+
+<section class="prose"><div class="wrap">
+  {p.groups.map((g: any, i: number) => (
+    <div class="svcgroup">
+      <div class="gh"><span class="gnum">{String(i + 1).padStart(2, '0')}</span><h2>{g.title}</h2></div>
+      <p class="gintro">{g.intro}</p>
+      <div class="gitems">
+        {g.items.map((it: any) => (<div class="svcitem"><h3>{it.h}</h3><p>{it.p}</p></div>))}
+      </div>
+    </div>
+  ))}
+</div></section>
+
+<section class="prose"><div class="wrap">
+  <div class="subcta">
+    <h2>{p.ctaTitle}</h2>
+    <a href={contact} class="btn btn-primary">{p.ctaBtn} →</a>
+  </div>
+</div></section>

@@ -1,0 +1,25 @@
+---
+import { useP } from '../../i18n/pages';
+import { useT, defaultLang } from '../../i18n/ui';
+const lang = Astro.currentLocale ?? defaultLang;
+const p = useP(lang).journal;
+const t = useT(lang);
+const bg = (k: string) => `background-image:var(--img-${k})`;
+---
+<section class="pagehero"><div class="wrap">
+  <span class="eyebrow">{p.eyebrow}</span>
+  <h1>{p.title}</h1>
+  <p>{p.lead}</p>
+</div></section>
+
+<section class="prose"><div class="wrap">
+  <p>{p.soon}</p>
+  <div class="jrn">
+    {t.journal.items.map((j: any) => (
+      <div class="jc">
+        <div class="img" style={bg(j.img)}></div>
+        <div class="b"><div class="m">{j.m}</div><h3>{j.h}</h3><p>{j.p}</p></div>
+      </div>
+    ))}
+  </div>
+</div></section>
