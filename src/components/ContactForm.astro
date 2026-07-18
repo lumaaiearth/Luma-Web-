@@ -1,0 +1,79 @@
+---
+import { useT, defaultLang } from '../i18n/ui';
+const lang = Astro.currentLocale ?? defaultLang;
+const t = useT(lang);
+const isDe = lang === 'de';
+const consent = isDe
+  ? 'Ich stimme zu, dass meine Angaben zur Bearbeitung der Anfrage verarbeitet werden. Details in der Datenschutzerklärung.'
+  : 'I agree that my details will be processed to handle this request. See the privacy policy for details.';
+const okMsg = isDe
+  ? 'Danke! Ihre Anfrage ist bei uns eingegangen — wir melden uns in Kürze.'
+  : 'Thank you! We received your request and will get back to you shortly.';
+const errMsg = isDe
+  ? 'Senden fehlgeschlagen. Bitte versuchen Sie es erneut oder schreiben Sie an info@luma.earth.'
+  : 'Sending failed. Please try again or email info@luma.earth.';
+const sending = isDe ? 'Wird gesendet…' : 'Sending…';
+---
+<form class="form" data-contact data-lang={lang} data-ok={okMsg} data-err={errMsg} data-sending={sending}>
+  <label for={`cf-n-${lang}`}>{t.contact.name}</label>
+  <input id={`cf-n-${lang}`} name="name" required maxlength="200" placeholder={t.contact.namePh} />
+  <label for={`cf-e-${lang}`}>{t.contact.email}</label>
+  <input id={`cf-e-${lang}`} name="email" type="email" required maxlength="320" placeholder={t.contact.emailPh} />
+  <label for={`cf-m-${lang}`}>{t.contact.msg}</label>
+  <textarea id={`cf-m-${lang}`} name="message" required maxlength="5000" placeholder={t.contact.msgPh}></textarea>
+  <!-- Honeypot: fuer Menschen unsichtbar; Bots fuellen es aus -->
+  <input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;opacity:0" />
+  <label style="display:flex;gap:10px;align-items:flex-start;text-transform:none;letter-spacing:0;font-family:var(--f-sans);font-size:13px;color:var(--muted);line-height:1.5">
+    <input type="checkbox" name="consent" required style="margin-top:3px;width:auto" />
+    <span>{consent}</span>
+  </label>
+  <button type="submit" class="btn btn-primary" style="justify-content:center">{t.contact.send}</button>
+  <p class="cf-status" role="status" aria-live="polite" style="display:none;margin:0;font-size:14.5px"></p>
+</form>
+
+<script is:inline>
+  (function () {
+    var ENDPOINT = 'https://eqwoyfsfyohtcibithak.supabase.co/functions/v1/contact-submit';
+    var ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxd295ZnNmeW9odGNpYml0aGFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNzU1NzUsImV4cCI6MjA5NTY1MTU3NX0.lygoUkOrF627c_FZrgigugmxp-H0Cq_Nv9Au8vFdcSU';
+    document.querySelectorAll('form[data-contact]').forEach(function (form) {
+      if (form.dataset.wired) return; form.dataset.wired = '1';
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var btn = form.querySelector('button[type="submit"]');
+        var status = form.querySelector('.cf-status');
+        var orig = btn.textContent;
+        btn.disabled = true; btn.textContent = form.dataset.sending;
+        status.style.display = 'none';
+        fetch(ENDPOINT, {
+          method: 'POST',
+          headers: { Authorization: 'Bearer ' + ANON, 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: form.elements.name.value,
+            email: form.elements.email.value,
+            message: form.elements.message.value,
+            website: form.elements.website.value,
+            locale: form.dataset.lang,
+          }),
+        })
+          .then(function (r) { return r.json().then(function (d) { return { ok: r.ok && d.ok, d: d }; }); })
+          .then(function (res) {
+            status.style.display = 'block';
+            if (res.ok) {
+              status.textContent = form.dataset.ok;
+              status.style.color = 'var(--green)';
+              form.reset();
+            } else {
+              status.textContent = (res.d && res.d.error) || form.dataset.err;
+              status.style.color = 'var(--earth)';
+            }
+          })
+          .catch(function () {
+            status.style.display = 'block';
+            status.textContent = form.dataset.err;
+            status.style.color = 'var(--earth)';
+          })
+          .finally(function () { btn.disabled = false; btn.textContent = orig; });
+      });
+    });
+  })();
+</script>

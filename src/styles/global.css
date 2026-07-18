@@ -60,6 +60,8 @@ nav.solid .lang{color:var(--muted)}
 .lang b{color:#fff}nav.solid .lang b{color:var(--ink)}
 .ttoggle{background:none;border:0;cursor:pointer;font-size:16px;color:rgba(255,255,255,.8)}
 nav.solid .ttoggle{color:var(--muted)}
+nav.solid .btn-light{color:var(--ink);border-color:var(--line);background:var(--surface)}
+nav.solid .btn-light:hover{border-color:var(--green)}
 @media (max-width:860px){.nav-links{display:none}}
 
 /* HERO */

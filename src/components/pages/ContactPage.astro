@@ -1,6 +1,7 @@
 ---
 import { useP } from '../../i18n/pages';
 import { useT, defaultLang } from '../../i18n/ui';
+import ContactForm from '../ContactForm.astro';
 const lang = Astro.currentLocale ?? defaultLang;
 const p = useP(lang).contact;
 const t = useT(lang);
@@ -17,14 +18,6 @@ const t = useT(lang);
       <b>LUMA</b>
       <p>{t.contact.address}<br /><a href="mailto:info@luma.earth">info@luma.earth</a></p>
     </div>
-    <form class="form" onsubmit="return false">
-      <label for="n">{t.contact.name}</label>
-      <input id="n" placeholder={t.contact.namePh} />
-      <label for="e">{t.contact.email}</label>
-      <input id="e" type="email" placeholder={t.contact.emailPh} />
-      <label for="m">{t.contact.msg}</label>
-      <textarea id="m" placeholder={t.contact.msgPh}></textarea>
-      <button class="btn btn-primary" style="justify-content:center">{t.contact.send}</button>
-    </form>
+    <ContactForm />
   </div>
 </div></section>
