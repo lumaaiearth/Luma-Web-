@@ -1,10 +1,25 @@
 ---
+import { getCollection } from 'astro:content';
 import { useP } from '../../i18n/pages';
-import { useT, defaultLang } from '../../i18n/ui';
+import { defaultLang } from '../../i18n/ui';
 const lang = Astro.currentLocale ?? defaultLang;
 const p = useP(lang).journal;
-const t = useT(lang);
+const base = import.meta.env.BASE_URL;
 const bg = (k: string) => `background-image:var(--img-${k})`;
+
+const posts = (await getCollection('journal', (e) => e.data.lang === lang)).sort((a, b) =>
+  a.data.date < b.data.date ? 1 : -1,
+);
+const artHref = (slug: string) => (lang === 'de' ? `${base}journal/${slug}` : `${base}en/journal/${slug}`);
+const months = {
+  de: ['Jan.', 'Feb.', 'März', 'Apr.', 'Mai', 'Juni', 'Juli', 'Aug.', 'Sep.', 'Okt.', 'Nov.', 'Dez.'],
+  en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+};
+const fmt = (iso: string) => {
+  const [y, m, d] = iso.split('-').map(Number);
+  const mn = (months as any)[lang][m - 1];
+  return lang === 'de' ? `${d}. ${mn} ${y}` : `${mn} ${d}, ${y}`;
+};
 ---
 <section class="pagehero"><div class="wrap">
   <span class="eyebrow">{p.eyebrow}</span>
@@ -13,13 +28,20 @@ const bg = (k: string) => `background-image:var(--img-${k})`;
 </div></section>
 
 <section class="prose"><div class="wrap">
-  <p>{p.soon}</p>
-  <div class="jrn">
-    {t.journal.items.map((j: any) => (
-      <div class="jc">
-        <div class="img" style={bg(j.img)}></div>
-        <div class="b"><div class="m">{j.m}</div><h3>{j.h}</h3><p>{j.p}</p></div>
-      </div>
-    ))}
-  </div>
+  {posts.length === 0 ? (
+    <p>{p.empty}</p>
+  ) : (
+    <div class="jrn">
+      {posts.map((post) => (
+        <a class="jc" href={artHref(post.slug)}>
+          <div class="img" style={bg(post.data.cover)}></div>
+          <div class="b">
+            <div class="m">{post.data.category} · {post.data.readingMin} {p.minSuffix} · {fmt(post.data.date)}</div>
+            <h3>{post.data.title}</h3>
+            <p>{post.data.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  )}
 </div></section>

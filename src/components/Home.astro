@@ -2,6 +2,7 @@
 import { useT, defaultLang } from '../i18n/ui';
 import { pageHref } from '../i18n/pages';
 import ContactForm from './ContactForm.astro';
+import { getCollection } from 'astro:content';
 const lang = Astro.currentLocale ?? defaultLang;
 const t = useT(lang);
 const bg = (k: string) => `background-image:var(--img-${k})`;
@@ -16,6 +17,11 @@ const link = {
 const moreServices = lang === 'de' ? 'Alle Leistungen' : 'All services';
 const moreProjects = lang === 'de' ? 'Alle Projekte' : 'All projects';
 const moreJournal = lang === 'de' ? 'Zum Journal' : 'To the journal';
+const posts = (await getCollection('journal', (e) => e.data.lang === lang))
+  .sort((a, b) => (a.data.date < b.data.date ? 1 : -1))
+  .slice(0, 3);
+const artHref = (slug: string) => (lang === 'de' ? `${base}journal/${slug}` : `${base}en/journal/${slug}`);
+const minLabel = lang === 'de' ? 'Min' : 'min';
 ---
 <!-- HERO -->
 <header class="hero" id="top">
@@ -193,14 +199,18 @@ const moreJournal = lang === 'de' ? 'Zum Journal' : 'To the journal';
   <div class="shead">
     <span class="eyebrow">{t.journal.eyebrow}</span>
     <h2>{t.journal.title}</h2>
-    <p>{t.journal.sub} <span class="mono" style="color:var(--earth)">{t.journal.note}</span></p>
+    <p>{t.journal.sub}</p>
     <a class="section-more" href={link.journal}>{moreJournal} →</a>
   </div>
   <div class="jrn">
-    {t.journal.items.map((j: any) => (
-      <a class="jc">
-        <div class="img" style={bg(j.img)}></div>
-        <div class="b"><div class="m">{j.m}</div><h3>{j.h}</h3><p>{j.p}</p></div>
+    {posts.map((post) => (
+      <a class="jc" href={artHref(post.slug)}>
+        <div class="img" style={bg(post.data.cover)}></div>
+        <div class="b">
+          <div class="m">{post.data.category} · {post.data.readingMin} {minLabel}</div>
+          <h3>{post.data.title}</h3>
+          <p>{post.data.description}</p>
+        </div>
       </a>
     ))}
   </div>

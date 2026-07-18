@@ -1,0 +1,45 @@
+---
+import { useP, pageHref } from '../../i18n/pages';
+import { defaultLang } from '../../i18n/ui';
+const { post } = Astro.props;
+const lang = Astro.currentLocale ?? defaultLang;
+const p = useP(lang).journal;
+const base = import.meta.env.BASE_URL;
+const journalHref = pageHref(base, lang, 'journal');
+const { Content } = await post.render();
+
+const months = {
+  de: ['Jan.', 'Feb.', 'März', 'Apr.', 'Mai', 'Juni', 'Juli', 'Aug.', 'Sep.', 'Okt.', 'Nov.', 'Dez.'],
+  en: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+};
+const [y, m, d] = post.data.date.split('-').map(Number);
+const mn = (months as any)[lang][m - 1];
+const dateStr = lang === 'de' ? `${d}. ${mn} ${y}` : `${mn} ${d}, ${y}`;
+---
+<article>
+  <div class="arthero" style={`background-image:var(--img-${post.data.cover})`}>
+    <div class="artveil"></div>
+    <div class="wrap artmeta">
+      <a class="artback" href={journalHref}>{p.backLabel}</a>
+      <div class="artcat">{post.data.category} · {post.data.readingMin} {p.minSuffix} · {dateStr}</div>
+      <h1>{post.data.title}</h1>
+      <p class="artlede">{post.data.description}</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="artbody">
+      <Content />
+      {post.data.sources && post.data.sources.length > 0 && (
+        <div class="artsources">
+          <h2>{p.sourcesLabel}</h2>
+          <ul>
+            {post.data.sources.map((s: any) => (
+              <li><a href={s.url} target="_blank" rel="noopener">{s.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  </div>
+</article>

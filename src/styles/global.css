@@ -276,3 +276,28 @@ footer{background:var(--forest);color:#c4d4c4;padding:64px 24px 40px}
 
 .section-more{font-family:var(--f-mono);font-size:13px;color:var(--green);display:inline-flex;gap:7px;align-items:center;margin-top:10px;letter-spacing:.02em}
 .section-more:hover{gap:11px}
+
+/* ── ARTICLE ──────────────────────────────────────────── */
+.arthero{position:relative;padding:150px 0 46px;color:#f3f7f1;overflow:hidden;background-size:cover;background-position:center}
+.arthero .artveil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,16,11,.5),rgba(8,16,11,.84))}
+.arthero .artmeta{position:relative}
+.artback{font-family:var(--f-mono);font-size:12.5px;color:#cfe9d5;display:inline-block;margin-bottom:20px}
+.artback:hover{color:#fff}
+.artcat{font-family:var(--f-mono);font-size:12px;letter-spacing:.05em;color:#a8e6bf;text-transform:uppercase;margin-bottom:12px}
+.arthero h1{font-size:clamp(30px,5vw,50px);line-height:1.05;font-weight:800;max-width:20ch;margin:0}
+.artlede{margin:16px 0 0;max-width:60ch;color:#dce6da;font-size:clamp(16px,2vw,19px);line-height:1.5}
+.artbody{max-width:720px;margin:0 auto;padding:56px 0 76px}
+.artbody h2{font-size:24px;margin:36px 0 12px;font-weight:750;letter-spacing:-.01em}
+.artbody h2:first-child{margin-top:0}
+.artbody p{font-size:17.5px;line-height:1.72;color:var(--ink-2);margin:0 0 18px}
+.artbody strong{color:var(--ink);font-weight:650}
+.artbody ul{margin:0 0 18px;padding-left:0;list-style:none}
+.artbody li{position:relative;padding-left:22px;margin:0 0 9px;color:var(--ink-2);font-size:17px;line-height:1.6}
+.artbody li::before{content:"";position:absolute;left:2px;top:11px;width:7px;height:7px;border-radius:2px;background:var(--green);transform:rotate(45deg)}
+.artbody a{color:var(--green);border-bottom:1px solid color-mix(in srgb,var(--green) 40%,transparent)}
+.artsources{margin-top:44px;padding-top:22px;border-top:1px solid var(--line)}
+.artsources h2{font-size:13px;font-family:var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.artsources ul{margin:0;padding-left:0;list-style:none}
+.artsources li{position:relative;padding-left:20px;margin:0 0 8px;font-size:14.5px;color:var(--ink-2)}
+.artsources li::before{content:"↗";position:absolute;left:0;top:0;color:var(--green);font-size:12px}
+a.jc{cursor:pointer}

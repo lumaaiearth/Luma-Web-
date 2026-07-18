@@ -6,6 +6,9 @@ import { pageHref } from '../i18n/pages';
 const lang = Astro.currentLocale ?? defaultLang;
 const t = useT(lang);
 const isDe = lang === 'de';
+const { pageTitle, pageDescription } = Astro.props;
+const metaTitle = pageTitle ?? t.meta.title;
+const metaDesc = pageDescription ?? t.meta.description;
 const base = import.meta.env.BASE_URL; // '/' oder '/Luma-Web-/'
 const home = base;
 const en = base + 'en/';
@@ -29,12 +32,12 @@ const favicon =
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{t.meta.title}</title>
-    <meta name="description" content={t.meta.description} />
+    <title>{metaTitle}</title>
+    <meta name="description" content={metaDesc} />
     <link rel="icon" href={favicon} />
     <style is:inline set:html={imgCss}></style>
-    <meta property="og:title" content={t.meta.title} />
-    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:title" content={metaTitle} />
+    <meta property="og:description" content={metaDesc} />
     <meta property="og:type" content="website" />
   </head>
   <body>
